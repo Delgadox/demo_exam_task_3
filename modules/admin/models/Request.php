@@ -57,7 +57,7 @@ class Request extends ActiveRecord
                 'value' => new Expression('NOW()'),
             ],
             [
-                'class' => BlameableBehavior::className(),
+                'class' => BlameableBehavior::className(),  
                 'createdByAttribute' => 'created_by',
                 'updatedByAttribute' => 'updated_by',
             ],
