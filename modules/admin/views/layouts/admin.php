@@ -29,8 +29,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => 'Меню администратора ',
+        'brandUrl' => '/admin/index',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -38,14 +38,11 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'Выйти из меню админа', 'url' => ['/site/index']],
+            ['label' => 'Запросы', 'url' => ['/admin/request/index']],
+            ['label' => 'Категории', 'url' => ['/admin/category/index']],
             Yii::$app->user->isGuest ? (
-                ''
-            ) : (
-                ['label' => 'Админка', 'url' => ['/admin/request/index']]
-            ),
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Авторизация', 'url' => ['/site/login']]
+                ['label' => 'Авторизироваться', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -55,7 +52,7 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-                )
+            )
         ],
     ]);
     NavBar::end();

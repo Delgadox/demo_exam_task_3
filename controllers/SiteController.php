@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\modules\admin\models\Request;   
+
 
 class SiteController extends Controller
 {
@@ -61,7 +63,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $request = Request::find()->where(['status'=>'Решена'])->limit(4)->orderBy('created_at DESC')->all();
+
+        return $this->render('index', ['request' => $request]);
     }
 
     /**
