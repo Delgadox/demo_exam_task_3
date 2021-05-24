@@ -138,11 +138,10 @@ class Request extends ActiveRecord
 
     public static function ListStatus(){
         $arr = [
-            'Новая' => 'Новая'
+            'Новая' => 'Новая',           
+            ['Решена'] = 'Решена'
         ];
-        // if (Yii::$app->user->can("admin")){
         if (Yii::$app->user->identity->username == "admin"){
-            $arr['Решена'] = 'Решена';
             $arr["Отклонена"] = "Отклонена";
         }
         return $arr;
