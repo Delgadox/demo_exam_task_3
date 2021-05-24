@@ -64,8 +64,12 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $request = Request::find()->where(['status'=>'Решена'])->limit(4)->orderBy('created_at DESC')->all();
+        $count = Request::find()->where(['status' => 'Решена'])->count();
+        return $this->render('index', [
+            'request' => $request,
+            'count' => $count
+        ]);
 
-        return $this->render('index', ['request' => $request]);
     }
 
     /**

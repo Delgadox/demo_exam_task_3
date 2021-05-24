@@ -10,6 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Запросы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="request-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -25,11 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
+            [
+                'attribute' => 'category_id',
+                'value' => 'category.name',
+                'filter' => \yii\helpers\ArrayHelper::map(\app\modules\admin\models\Category::find()->all(), 'id', 'name'),
+            ],
             'status',
             'name',
-            // 'category_id',
             [           
                 'attribute' => 'before_img',
                 'value' => function($model){

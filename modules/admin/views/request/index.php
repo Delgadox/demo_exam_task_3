@@ -25,9 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            [
+                'attribute' => 'category_id',
+                'value' => 'category.name',
+                'filter' => \yii\helpers\ArrayHelper::map(\app\modules\admin\models\Category::find()->all(), 'id', 'name'),
+            ],
+            // 'id',
             'status',
-            'name',
+            'name',     
             [           
                 'attribute' => 'before_img',
                 'value' => function($model){

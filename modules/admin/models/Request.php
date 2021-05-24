@@ -78,6 +78,12 @@ class Request extends ActiveRecord
             [['imageFile2'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, bmp', 'maxSize' => 10*1024*1024],
             [['status', 'name', 'before_img','after_img'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+            ['imageFile2', 'required', 'when' => function($model, $attribute) {
+                return $model->status == 'Решена';
+           }, 'enableClientValidation' => false],
+            ['why_not', 'required', 'when' => function($model, $attribute) {
+                return $model->status == 'Отклонена';
+           }, 'enableClientValidation' => false],
         ];
     }
 
@@ -128,5 +134,17 @@ class Request extends ActiveRecord
         } else {
             return false;
         }
+    }
+
+    public static function ListStatus(){
+        $arr = [
+            'Новая' => 'Новая',
+            'Решена' => 'Решена',
+        ];
+        // if (Yii::$app->user->can("admin")){
+        if (Yii::$app->user->identity->username == "admin"){
+            $arr["Отклонена"] = "Отклонена";
+        }
+        return $arr;
     }
 }

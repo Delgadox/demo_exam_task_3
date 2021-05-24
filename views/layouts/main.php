@@ -39,14 +39,15 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Главная', 'url' => ['/site/index']],
-            Yii::$app->user->isGuest ? (
-                ''
-            ) : (
+            Yii::$app->user->identity->username == "admin" ? (
                 ['label' => 'Админка', 'url' => ['/admin/request/index']]
-            ),
+            ) : (''),
+            !Yii::$app->user->isGuest ? (
+                ['label' => 'Мои запросы', 'url' => ['/front/index']]
+            ) : (''),
             Yii::$app->user->isGuest ? (
                 ['label' => 'Авторизация', 'url' => ['/site/login']]
-            ) : (
+            ) : (   
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
@@ -55,7 +56,7 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-                )
+            ),
         ],
     ]);
     NavBar::end();
