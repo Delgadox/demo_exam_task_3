@@ -38,7 +38,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'Главная', 'url' => ['/site/index'], 'visible' => Yii::$app->user->identity->username],
             Yii::$app->user->identity->username == "admin" ? (
                 ['label' => 'Админка', 'url' => ['/admin/request/index']]
             ) : (''),
