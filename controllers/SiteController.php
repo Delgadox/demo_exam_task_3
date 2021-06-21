@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\SingupForm;
 use app\modules\admin\models\Request;   
 
 
@@ -90,6 +91,22 @@ class SiteController extends Controller
 
         $model->password = '';
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionSignup()
+    {
+        $model = new SingupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goBack();
+                }
+            }
+        }
+
+        return $this->render('singup', [
             'model' => $model,
         ]);
     }

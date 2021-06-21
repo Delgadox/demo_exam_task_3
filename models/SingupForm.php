@@ -7,7 +7,7 @@ use app\models\User;
 /**
  * Signup form
  */
-class SignupForm extends Model
+class SingupForm extends Model
 {
     public $username;
     public $email;

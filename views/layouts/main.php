@@ -38,13 +38,10 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index'], 'visible' => Yii::$app->user->identity->username],
-            Yii::$app->user->identity->username == "admin" ? (
-                ['label' => 'Админка', 'url' => ['/admin/request/index']]
-            ) : (''),
-            !Yii::$app->user->isGuest ? (
-                ['label' => 'Мои запросы', 'url' => ['/front/index']]
-            ) : (''),
+            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'Админка', 'url' => ['/admin/request/index'], 'visible' =>  Yii::$app->user->identity->username == 'admin'],
+            ['label' => 'Мои запросы', 'url' => ['/front/index'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Регистрация', 'url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Авторизация', 'url' => ['/site/login']]
             ) : (   
